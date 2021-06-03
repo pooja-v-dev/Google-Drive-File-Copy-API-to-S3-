@@ -9,6 +9,24 @@ use Aws\S3\Exception\S3Exception;
 
 $service = new Google_Service_Drive($GLOBALS['client']);
 
+
+if(!isset($_POST['folder']) || empty($_POST['folder'])){
+    echo "Please enter the folder name";
+    exit;
+}
+
+
+if(!isset($_POST['filename']) || empty($_POST['filename'])){
+    echo "Please enter the filename";
+    exit;
+}
+
+
+if(!isset($_POST['s3bucket']) || empty($_POST['s3bucket'])){
+    echo "Please enter the s3bucket";
+    exit;
+}
+
 $folderName = $_POST['folder'];
 $parameters['q'] = "name = '" . $folderName . "' and  trashed=false";
 $files = $service->files->listFiles($parameters);
